@@ -11,7 +11,10 @@
 
 echo "Setuid files:"
 echo "============="
-find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -k 3 | ls -lS --block-size=M | sort -rn | grep -v ^total | head -n 10
+find / -type f -executable -perm -4000 -ls 2>/dev/null | sort -r -n -k 3 | sort -rn | grep -v ^total
 echo "Setgid files:"
 echo "============"
-find / -type f -executable -perm -2000 -ls 2>/dev/null | sort -k 3 | ls -lS --block-size=M | sort -rn | grep -v ^total | head -n 10
+find / -type f -executable -perm -2000 -ls 2>/dev/null | sort -k 3 | sort -rn | grep -v ^total
+echo "Top 10 largest files in the system"
+echo "============"
+find -type f -executable -ls | sort -rn | head -n 10 
