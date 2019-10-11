@@ -43,6 +43,7 @@ secondNumber=7
 
 # This section demonstrates testing variables
 
+
 # Test if the USER variable exists
 # TASK 1: Add a command that prints out a labelled description of what is in the USER variable, but only if it is not empty
 # TASK 2: Add a command that tells the user if the USER variable exists, but is empty

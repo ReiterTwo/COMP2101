@@ -17,7 +17,30 @@ while [ $# -gt 0 ]; do
 #             display an error if the user gave the -d option without a number after it
 # TASK 3: put anything that wasn't recognized on the command line into a variable for use later in the script
   echo "Processing '$1'."
-
+case "$1" in
+  -h | --help)
+  var1=$(basename $0)
+  echo "$var1 [-h | --help] [-v verbose] [-d[1-3] debug mode level] ] "
+  exit
+  ;;
+  -v )
+  verb="yes"
+  echo "Verbose mode turned to ON"
+  ;;
+  -d[1-4] )
+  var2=$1
+  lvl= "${var:2:1}"
+  dbug=yes
+  echo "Debug mode set to $lvl"
+  ;;
+  -d[0,4-9,a-z,A-Z]* )
+  echo "You point in the wrong input for Degbug mode."
+  exit 2
+  ;;
+  *)
+  export stored=$1
+  echo "Command Stored"
+esac
   # each time through the loop, shift the arguments left
   # this decrements the argument count for us
   shift

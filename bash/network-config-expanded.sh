@@ -22,7 +22,7 @@
 # stream editing with sed and awk are used to extract only the data we want displayed
 
 #####
-# Once per host report
+echo "Once per host report"
 #####
 # we use the hostname command to get our system name
 my_hostname=$(hostname)
@@ -61,10 +61,19 @@ EOF
 # Per-interface report
 #####
 # define the interface being summarized
-interface="eno1"
+#interface="ens33"
+interface=$(ifconfig | awk -F ':' '/^[^ ]*: / && $1 != "lo" {print $1}')
+for val in $interface;do
+
+
+
 
 # Find an address and hostname for the interface being summarized
 # we are assuming there is only one IPV4 address assigned to this interface
+if [ val == "lo" ]; then
+  continue
+fi
+
 ipv4_address=$(ip a s $interface|awk -F '[/ ]+' '/inet /{print $3}')
 ipv4_hostname=$(getent hosts $ipv4_address | awk '{print $2}')
 
@@ -74,7 +83,7 @@ network_number=$(cut -d / -f 1 <<<"$network_address")
 network_name=$(getent networks $network_number|awk '{print $1}')
 
 cat <<EOF
-Interface $interface:
+Interface $((i+1)) - $interface:
 ===============
 Address         : $ipv4_address
 Name            : $ipv4_hostname
@@ -82,6 +91,8 @@ Network Address : $network_address
 Network Name    : $network_name
 
 EOF
+
+done
 #####
 # End of per-interface report
 #####
