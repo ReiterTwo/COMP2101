@@ -6,9 +6,21 @@
 #       reset the count to the maximum and tell the user they are not allowed to interrupt
 #       the count. If the script receives a QUIT signal, tell the user they found the secret
 #       to getting out of the script and exit immediately.
+function startover {
+  sleepCount=10
+  echo "Nice try, you are not allowed to interrupt the count."
+}
+
+function masterkey {
+    echo "Congrats, you have found the secert way out of the script."
+  exit
+}
+trap masterkey SIGQUIT
+trap startover SIGINT
+
 
 # Task: Explain in a comment how the line with the word moose in it works.
-
+#The line with the word moose is  redirection the STDERR to to a file. 
 #### Variables
 programName="$(basename $0)" # used by error_functions.sh
 sleepTime=1 # delay used by sleeptime
@@ -38,6 +50,8 @@ Usage: ${programName} [-h|--help ] [-w|--waittime waittime] [-n|--waitcount wait
 Default waittime is 1, waitcount is 10
 EOF
 }
+
+
 
 #### Main Program
 

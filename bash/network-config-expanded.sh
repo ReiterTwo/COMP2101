@@ -65,9 +65,6 @@ EOF
 interface=$(ifconfig | awk -F ':' '/^[^ ]*: / && $1 != "lo" {print $1}')
 for val in $interface;do
 
-
-
-
 # Find an address and hostname for the interface being summarized
 # we are assuming there is only one IPV4 address assigned to this interface
 if [ val == "lo" ]; then
