@@ -20,7 +20,7 @@ trap startover SIGINT
 
 
 # Task: Explain in a comment how the line with the word moose in it works.
-#The line with the word moose is  redirection the STDERR to to a file. 
+#The line with the word moose is is going to print out "Unknown Error - a moose bit my sister once" to the stderr log file. 
 #### Variables
 programName="$(basename $0)" # used by error_functions.sh
 sleepTime=1 # delay used by sleeptime
