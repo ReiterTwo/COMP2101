@@ -1,1 +1,0 @@
-﻿$env:PATH = "$env:PATH;c:/Users/Tyler/Documents/GitHub/COMP2101/Powershell"
